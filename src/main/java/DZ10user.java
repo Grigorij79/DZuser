@@ -31,13 +31,12 @@ public class DZ10user {
     }
     public static void readListUser(String nameFile) throws IOException{
         ArrayList <User> users  = new ArrayList<>();
-         //HashMap <String,Integer> users = new HashMap<>();
+
         try (FileReader read = new FileReader(nameFile)){
             BufferedReader reader = new BufferedReader(read);
             String coma = ",";
-           // String name = "\"name\"";
             String nameName = "";
-            //String age = "\"age\"";
+
             String ageAge = "";
 
             reader.readLine();
@@ -48,32 +47,23 @@ public class DZ10user {
 
                 line = line.strip();
                 line = line.replaceAll("\\s+"," ");
-                //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
                 int j = line.indexOf(' ');
                 for (int i = 0; i < j; i++) {
                     nameName = nameName + line.charAt(i);
                 }
-               // System.out.println(line);
-               // System.out.println(nameName);
+
 
                 Integer ageInt = 0;
                 ageAge = line.substring(j+1,line.length());
-                //System.out.println(ageAge);
+
                 try {
                     ageInt = Integer.parseInt(ageAge);
                 }
                 catch (NumberFormatException e) {
                     ageInt = 0;
                 }
-               // System.out.println(ageInt);
-              users.add(new User(nameName,ageInt));
+                users.add(new User(nameName,ageInt));
 
-                //System.out.println(users);
-               // print(users);
-
-                //System.out.println(line);
-                //System.out.println(nameName);
-                //System.out.println(ageAge);
                 line = reader.readLine();
                 nameName = "";
                 ageAge = "";
@@ -81,7 +71,6 @@ public class DZ10user {
         }catch (IOException e){
             System.out.println(e.getMessage());
         }
-
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         writeFileWithOutputStream("user.json", gson.toJson(users));
 
